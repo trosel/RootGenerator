@@ -1,0 +1,111 @@
+<html>
+<body>
+<h2>
+Root Generator
+</h2>
+<button onclick="go();">Generate</button>
+<p id="rootCount">
+</p>
+<ul id="roots">
+</ul>
+
+<script>
+  
+function generateRoots(c, l, v, f) {
+	var roots = [];
+  var count = 0;
+	for(i=0;i<c.length;i++) {
+  	
+  	for(j=0;j<l.length;j++) {
+    	
+    	for(k=0;k<v.length;k++) {
+      	if (v[k] === l[j]) {
+        	continue;
+        }
+      	for(m=0;m<f.length;m++) {
+        	if (f[m] == v[k]) {
+          	continue;
+          }
+        	roots.push(c[i] + l[j] + v[k] + f[m])
+          count++;
+        }
+      }
+    }
+  }
+  return {roots: roots, count: count};
+}
+
+
+var C = [
+'',
+'B',
+'X' ,
+'D',
+'F',
+'G',
+'H',
+'J' ,
+'K',
+'L',
+'M',
+'N',
+'P',
+'R',
+'S',
+'ʃ' ,
+'T',
+'V',
+'Z',
+]
+
+var L = [
+'',
+'R',
+'L',
+'I',
+'U',
+]
+
+var V = [
+'A',
+'E',
+'I',
+'O',
+'U',
+]
+
+var F = [
+'',
+'I',
+'U',
+'ŋ',
+'B',
+'X' ,
+'D',
+'F',
+'G',
+'J' ,
+'K',
+'L',
+'M',
+'N',
+'P',
+'R',
+'S',
+'ʃ' ,
+'T',
+'V',
+'Z',
+]
+
+function go() {
+  var rootOptions = generateRoots(C,L,V,F);
+  var htmlList = document.getElementById("roots");
+  var htmlCount = document.getElementById("rootCount");
+
+  htmlCount.innerHTML = rootOptions.count;
+  rootOptions.roots.forEach( r => htmlList.innerHTML += '<li>' + r + '</li>' )
+}
+</script>
+</body>
+</html>
