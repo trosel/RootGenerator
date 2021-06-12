@@ -3,7 +3,7 @@
 <h2>
 Root Generator
 </h2>
-<button onclick="go();">Generate</button>
+<button onclick="go()">Generate</button>
 <p id="rootCount">
 </p>
 <ul id="roots">
@@ -14,14 +14,15 @@ Root Generator
 function generateRoots(c, l, v, f) {
 	var roots = [];
   	var count = 0;
-	console.log('starting consonant:' + c);
 	for(i=0;i<c.length;i++) {
   		for(j=0;j<l.length;j++) {
 			for(k=0;k<v.length;k++) {
 				if (v[k] === l[j]) { continue; }
       				for(m=0;m<f.length;m++) {
         				if (f[m] == v[k]) { continue; }
-        				roots.push(c[i] + l[j] + v[k] + f[m])
+					var root = c[i] + l[j] + v[k] + f[m];
+        				roots.push(root);
+					console.log(root);
           				count++;
         			}
      			}
