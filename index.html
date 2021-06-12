@@ -14,6 +14,8 @@ Root Generator
 function generateRoots(c, l, v, f) {
 	var roots = [];
   	var count = 0;
+	var htmlList = document.getElementById("roots");
+	var htmlCount = document.getElementById("rootCount");
 	for(i=0;i<c.length;i++) {
   		for(j=0;j<l.length;j++) {
 			for(k=0;k<v.length;k++) {
@@ -22,13 +24,14 @@ function generateRoots(c, l, v, f) {
         				if (f[m] == v[k]) { continue; }
 					var root = c[i] + l[j] + v[k] + f[m];
         				roots.push(root);
-					console.log(root);
+					htmlList.innerHTML += '<li>' + root + '</li>'
           				count++;
         			}
      			}
     		}
   	}
-	return {roots: roots, count: count};
+	htmlCount.innerHTML = count;
+	//return {roots: roots, count: count};
 }
 
 
@@ -95,12 +98,14 @@ var F = [
 ]
 
 function go() {
-  var rootOptions = generateRoots(C,L,V,F);
-  var htmlList = document.getElementById("roots");
-  var htmlCount = document.getElementById("rootCount");
+  //var rootOptions = generateRoots(C,L,V,F);
+	generateRoots(C,L,V,F);
 
-  htmlCount.innerHTML = rootOptions.count;
-  rootOptions.roots.forEach( r => htmlList.innerHTML += '<li>' + r + '</li>' )
+  //var htmlList = document.getElementById("roots");
+  //var htmlCount = document.getElementById("rootCount");
+
+  //htmlCount.innerHTML = rootOptions.count;
+  //rootOptions.roots.forEach( r => htmlList.innerHTML += '<li>' + r + '</li>' )
 }
 </script>
 </body>
