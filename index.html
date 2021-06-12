@@ -13,26 +13,21 @@ Root Generator
   
 function generateRoots(c, l, v, f) {
 	var roots = [];
-  var count = 0;
+  	var count = 0;
+	console.log('starting consonant:' + c);
 	for(i=0;i<c.length;i++) {
-  	
-  	for(j=0;j<l.length;j++) {
-    	
-    	for(k=0;k<v.length;k++) {
-      	if (v[k] === l[j]) {
-        	continue;
-        }
-      	for(m=0;m<f.length;m++) {
-        	if (f[m] == v[k]) {
-          	continue;
-          }
-        	roots.push(c[i] + l[j] + v[k] + f[m])
-          count++;
-        }
-      }
-    }
-  }
-  return {roots: roots, count: count};
+  		for(j=0;j<l.length;j++) {
+			for(k=0;k<v.length;k++) {
+				if (v[k] === l[j]) { continue; }
+      				for(m=0;m<f.length;m++) {
+        				if (f[m] == v[k]) { continue; }
+        				roots.push(c[i] + l[j] + v[k] + f[m])
+          				count++;
+        			}
+     			}
+    		}
+  	}
+	return {roots: roots, count: count};
 }
 
 
