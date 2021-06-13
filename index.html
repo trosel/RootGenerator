@@ -1,112 +1,126 @@
 <html>
+<head>
+</head>
 <body>
 <h2>
 Root Generator
 </h2>
-<button onclick="go()">Generate</button>
+<p>
+Enter a each letter and hit return. If one letter is optional, hit return to represent an "invisible letter"
+</p>
+<label>C:</label>
+<textarea id="Cletters" rows="20" cols="5">
+
+B
+X
+D
+F
+G
+H
+J
+K
+L
+M
+N
+P
+R
+S
+ʃ
+T
+V
+Z</textarea>
+<label>L:</label>
+<textarea id="Lletters" rows="20" cols="5">
+
+R
+L
+I
+U</textarea>
+<label>V:</label>
+<textarea id="Vletters" rows="20" cols="5">
+A
+E
+I
+O
+U</textarea>
+<label>F:</label>
+<textarea id="Fletters" rows="20" cols="5">
+
+I
+U
+ŋ
+B
+X
+D
+F
+G
+J
+K
+L
+M
+N
+P
+R
+S
+ʃ
+T
+V
+Z</textarea>
+<label>Not Allowed Combos:</label>
+<textarea id="notAllowed" rows="20" cols="5">
+RL
+LR
+AA
+EE
+II
+OO
+UU</textarea>
+<button onclick="generateRoots()">Generate</button>
 <p id="rootCount">
 </p>
-<ul id="roots">
-</ul>
+<p id="filteredRootCount">
+</p>
+<label>Roots:</label>
+<textarea id="roots" rows="50" cols="15">
+</textarea>
 
 <script>
   
-function generateRoots(c, l, v, f) {
+function generateRoots() {
+	
+	var c = document.getElementById("Cletters").value.split('\n');
+	var l = document.getElementById("Lletters").value.split('\n');
+	var v = document.getElementById("Vletters").value.split('\n');
+	var f = document.getElementById("Fletters").value.split('\n');
+  var notAllowed = document.getElementById("notAllowed").value.split('\n');  
+	
 	var roots = [];
-  	var count = 0;
+	var count = 0;
 	var htmlList = document.getElementById("roots");
 	var htmlCount = document.getElementById("rootCount");
+  var htmlFilteredCount = document.getElementById("filteredRootCount");
+	
 	for(i=0;i<c.length;i++) {
-  		for(j=0;j<l.length;j++) {
-			for(k=0;k<v.length;k++) {
-				if (v[k] === l[j]) { continue; }
-      				for(m=0;m<f.length;m++) {
-        				if (f[m] == v[k]) { continue; }
-					var root = c[i] + l[j] + v[k] + f[m];
-        				roots.push(root);
-					htmlList.innerHTML += '<li>' + root + '</li>'
-          				count++;
-        			}
-     			}
-    		}
-  	}
-	htmlCount.innerHTML = count;
-	//return {roots: roots, count: count};
+	   for(j=0;j<l.length;j++) {
+	    for(k=0;k<v.length;k++) {
+	      for(m=0;m<f.length;m++) {      
+	        var root = c[i] + l[j] + v[k] + f[m];
+	        roots.push(root);
+	        count++;
+	           }
+	        }
+	     }
+	 }
+      htmlCount.innerHTML = 'pre-filtered: ' + count;
+	
+      var filteredCount = 0;
+      var filteredRoots = roots.filter(r => notAllowed.every(nope => !r.includes(nope)));
+      filteredRoots.forEach( r => filteredCount++ );
+	
+  htmlFilteredCount.innerHTML = 'filtered: ' + filteredCount;
+  filteredRoots.forEach( r => htmlList.value += r + '\n' )
 }
 
-
-var C = [
-'',
-'B',
-'X' ,
-'D',
-'F',
-'G',
-'H',
-'J' ,
-'K',
-'L',
-'M',
-'N',
-'P',
-'R',
-'S',
-'ʃ' ,
-'T',
-'V',
-'Z',
-]
-
-var L = [
-'',
-'R',
-'L',
-'I',
-'U',
-]
-
-var V = [
-'A',
-'E',
-'I',
-'O',
-'U',
-]
-
-var F = [
-'',
-'I',
-'U',
-'ŋ',
-'B',
-'X' ,
-'D',
-'F',
-'G',
-'J' ,
-'K',
-'L',
-'M',
-'N',
-'P',
-'R',
-'S',
-'ʃ' ,
-'T',
-'V',
-'Z',
-]
-
-function go() {
-  //var rootOptions = generateRoots(C,L,V,F);
-	generateRoots(C,L,V,F);
-
-  //var htmlList = document.getElementById("roots");
-  //var htmlCount = document.getElementById("rootCount");
-
-  //htmlCount.innerHTML = rootOptions.count;
-  //rootOptions.roots.forEach( r => htmlList.innerHTML += '<li>' + r + '</li>' )
-}
 </script>
 </body>
 </html>
