@@ -43,6 +43,11 @@ E
 I
 O
 U</textarea>
+<label>V2:</label>
+<textarea id="V2letters" rows="20" cols="5">
+
+I
+U</textarea>
 <label>F:</label>
 <textarea id="Fletters" rows="20" cols="5">
 
@@ -103,6 +108,7 @@ function generateRoots() {
 	var c = document.getElementById("Cletters").value.split('\n');
 	var l = document.getElementById("Lletters").value.split('\n');
 	var v = document.getElementById("Vletters").value.split('\n');
+	var v2 = document.getElementById("V2letters").value.split('\n');
 	var f = document.getElementById("Fletters").value.split('\n');
   var notAllowed = document.getElementById("notAllowed").value.split('\n');  
 	
@@ -115,11 +121,13 @@ function generateRoots() {
 	for(i=0;i<c.length;i++) {
 	   for(j=0;j<l.length;j++) {
 	    for(k=0;k<v.length;k++) {
-	      for(m=0;m<f.length;m++) {      
-	        var root = c[i] + l[j] + v[k] + f[m];
-	        roots.push(root);
-	        count++;
-	           }
+		    for(n=0;n<v2.length;n++) {
+	      		for(m=0;m<f.length;m++) {      
+	        		var root = c[i] + l[j] + v[k] + v2[n] + f[m];
+	        		roots.push(root);
+	        		count++;
+	           	}
+		    }
 	        }
 	     }
 	 }
